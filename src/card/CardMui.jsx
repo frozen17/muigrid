@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+
 
 const CardMui = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const muiApi = [
     {
       img: "https://i.ytimg.com/vi/U1h5WZT4k8I/maxresdefault.jpg",
@@ -63,9 +69,40 @@ const CardMui = () => {
       channel: "Gaimin Gladiators",
       duration: "1 min ago",
     },
+
+    
   ];
+
+
+//   const handleSearch = () => {
+// if(!searchTerm){
+//   return muiApi;
+// }else{
+//   return setSearchResults(muiApi.filter((item) => (
+//         item.channel.toLowerCase().includes(searchTerm.toLowerCase())
+//       )))
+// }
+//   };
+  useEffect(() => {
+    setSearchResults(muiApi.filter((item) => (
+      item.channel.toLowerCase().includes(searchTerm.toLowerCase())
+    )))
+  }, [])
   return (
-    <div
+    <div>
+             <TextField
+        label="Поиск"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(e) => setSearchResults(e)}
+      >
+        Очистить
+      </Button>
+        <div
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -73,9 +110,10 @@ const CardMui = () => {
         padding: "15px"
       }}
     >
+
       <Grid container spacing={2}> 
       {muiApi?.map((mui, index) => (
-        <Grid item  md={4} lg={3} sx={3} xl={2}>
+        <Grid key={index} item  md={4} lg={3} xs={6} xl={2}>
           <Card key={index}>
               <div
                 style={{
@@ -111,7 +149,9 @@ const CardMui = () => {
           </Card>
         </Grid>
       ))}</Grid>
+    </div>  
     </div>
+
   );
 };
 
