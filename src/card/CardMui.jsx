@@ -70,20 +70,17 @@ const CardMui = () => {
       {muiApi?.map((mui, index) => (
         <Grid item  md={4} lg={3} sx={3} xl={2}>
           <Card key={index}>
-              <img
-                src={mui.img}
-                alt=""
-                sx={{ height: 140 }}
-                title="green iguana"
+              <div
                 style={{
                   borderRadius: "15px",
                   width: "100%",
                   height: "200px",
-                  backgroundImage: "cover",
+                  backgroundImage: `url(${mui.img})`,
                   backgroundRepeat: "no-repeat",
-                  backgroundPosition: "cover",
-                }}
-              />
+                  backgroundPosition: "center",
+                  backgroundSize: "cover"
+                }}>
+              </div>
               <CardContent style={{ display: "flex" }}>
                 <img
                   src={mui.logo}
