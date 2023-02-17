@@ -66,7 +66,7 @@ function App() {
   ];
 
   const filteresProducts = muiApi.filter((product) => {
-    return product.channel.toLowerCase().includes(value.toLowerCase());
+    return product.title.toLowerCase().includes(value.toLowerCase())
   });
   return (
     <div className="App">
